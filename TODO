@@ -1,3 +1,13 @@
 vim:ai:et:ts=4:nowrap
 
-    * support of ogg (and/or maybe mkv) as container format
+libcapseo:
+    * add support of ogg (and/or maybe mkv) as container format
+    * add support to include audio into the stream(?)
+
+cpsrecode:
+    * fail if output _filename_ already exists
+    * complete progress bar (ETA, progresss percentage)
+
+general:
+    * instead of cpsplay, write a libavformat/mplayer plugin for supporting capseo codec 
+      streams to play or be used by mencoder.
