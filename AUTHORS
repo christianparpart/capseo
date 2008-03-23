@@ -1,0 +1,8 @@
+the actual compression/decompression algorithm is based on quicklz (http://www.quicklz.com)
+	Copyright 2006, Lasse Reinhold (lar@quicklz.com)
+
+codec idea based on by wereHamster - what's your full name, and email?
+	Were Hamster <were at hamster tod org>
+
+put it together into a single reusable library:
+	Christian Parpart <trapni@gentoo.org>

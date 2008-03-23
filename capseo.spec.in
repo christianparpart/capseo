@@ -1,0 +1,47 @@
+%define name capseo
+%define version @VERSION@
+%define release 1
+
+Summary: Capseo Video Codec
+Name: %{name}
+Version: %{version}
+Release: %{release}
+Source: http://upstream.rm-rf.in/${name}/%{name}-%{version}.tbz2
+Vendor: Captury
+URL: http://rm-rf.in/captury
+License: GPL
+Group: Libraries/MultiMedia
+Prefix: %{_prefix}
+
+%description
+This library contains the reference capseo codec API and implementation.
+
+%prep
+%setup
+#%setup -q
+
+%build
+make
+
+%install
+make install DESTDIR=%RPM_BUILD_ROOT
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
+%files
+%defattr(-,root,root)
+%doc AUTHORS ChangeLog COPYING NEWS README
+%{_prefix}/bin/cpsrecode
+%{_prefix}/lib/lib*.a
+%{_prefix}/lib/lib*.la
+%{_prefix}/lib/lib*.so
+%{_prefix}/include/*
+%{_prefix}/lib/pkgconfig/*
+
+%changelog
+* 2007-06-013 Christian Parpart <trapni@gentoo.org>
+- initial spec file, and my very first one :D

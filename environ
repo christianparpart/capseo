@@ -1,0 +1,29 @@
+# (Gentoo Linux) Global Configuration
+# vim:ai:noet:ts=4:nowrap:syntax=sh
+
+if test "$1" = "debug" -o "$1" = ""; then
+	export CFLAGS="${NOPIE} -O0 -ggdb3 -pipe"
+	export CXXFLAGS="${CFLAGS}"
+	#export DEBUG="TApplication"
+else
+	# importing system values
+	[ -f /etc/make.globals ] && source /etc/make.globals
+	[ -f /etc/make.conf ] && source /etc/make.conf
+	export CFLAGS
+	export CXXFLAGS
+fi
+
+# assume proper autotool versions
+export WANT_AUTOCONF=2.5
+export WANT_AUTOMAKE=1.10
+
+# add colorgcc to PATH
+if [[ -d /usr/lib/colorgcc/bin ]]; then
+	if ! echo ${PATH} | grep -q colorgcc/bin; then
+	export PATH=/usr/lib/colorgcc/bin:${PATH}
+	fi
+fi
+
+if ! echo ${PKG_CONFIG_PATH} | grep -q /opt/sandbox/lib; then
+	export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}${PKG_CONFIG_PATH:+:}/opt/sandbox/lib/pkgconfig"
+fi

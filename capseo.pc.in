@@ -1,0 +1,19 @@
+# capseo.pc.in
+# $Id$
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: capseo
+Description: Capseo Video Codec Library
+Version: @VERSION@
+# Requires: 
+# Conflicts: 
+
+# debian/ubuntu doesn't like rpath
+#Libs: -L${libdir} -Wl,--rpath -Wl,${libdir} -lcapseo
+
+Libs: -L${libdir} -lcapseo
+Cflags: -I${includedir}

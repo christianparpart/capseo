@@ -1,0 +1,19 @@
+vim:ai:et:ts=4:nowrap
+
+    libcapseo - realtime movie encoder/decoder library
+    ==================================================
+
+    The capseo codec is meant to encode fast, not to generate 
+    the smallest files on your file system.
+
+    Proposed Filename Extension for raw Encoded Streams:
+        .cps
+
+
+    RELATED SOFTWARE:
+    =================
+
+ * seom       - http://www.neopsis.com/projects/seom
+                the capseo codec is based on seom's code.
+ * libcaptury - http://rm-rf.in/projects/captury
+                based on libcapseo to encode video.

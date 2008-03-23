@@ -1,0 +1,10 @@
+Release 0.2.0 (not yet released):
+	* codec: improved stream and frame format
+	* codec: added cursor frame support
+	* framework: improved error management
+	* ogginfo: new in the tool set
+	* cpsrecode: added ogg/theora support (lags frame vflip?)
+
+Release 0.1.0 (2007-02-19):
+	* Initial working version for capturing and encoding video data;
+	* The encoded frames and the stream are binary compatible with seom.
