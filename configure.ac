@@ -67,7 +67,7 @@ dnl }}}
 dnl {{{ --enable-examples
 AC_ARG_ENABLE([examples], [
   --enable-examples       Enables compilation of example program(s)],
-  [enable_examples=${withval}],
+  [enable_examples=${enableval}],
   [enable_examples=yes]
 )
 AM_CONDITIONAL([EXAMPLE], [test x$enable_examples = xyes])
