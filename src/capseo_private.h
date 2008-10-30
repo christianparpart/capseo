@@ -44,6 +44,8 @@ struct capseo_private_t {
 
 	// cursor related
 	capseo_cursor_t FCursor;
+
+	void *compressor;
 };
 
 struct CAPSEO_PACKED TCapseoStreamHeader {

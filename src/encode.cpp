@@ -13,6 +13,7 @@
 /////////////////////////////////////////////////////////////////////////////
 #include "capseo.h"
 #include "capseo_private.h"
+#include "compress.h"
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -100,6 +101,7 @@ capseo_frame_id_t CapseoCreateFrameID(capseo_t *cs) {
 int CapseoEncodeFrame(capseo_t *cs, uint8_t *frame_in, capseo_frame_id_t id, capseo_cursor_t *cursor, uint8_t **outbuf, int *outlen) {
 	int width = cs->info.width;
 	int height = cs->info.height;
+	void *ch = cs->priv->compressor;
 
 	uint8_t *yuvBuffer;
 	switch (cs->info.format) {
@@ -139,8 +141,7 @@ int CapseoEncodeFrame(capseo_t *cs, uint8_t *frame_in, capseo_frame_id_t id, cap
 	*outlen += sizeof(frameHeader);
 
 	// encode video frame
-	uint8_t *end = encode(outptr, yuvBuffer, width * height * 3 / 2);
-	frameHeader.video.length = end - outptr;
+	frameHeader.video.length = Compress(ch, yuvBuffer, width * height * 3 / 2, outptr);
 	outptr += frameHeader.video.length;
 	*outlen += frameHeader.video.length;
 
@@ -148,9 +149,9 @@ int CapseoEncodeFrame(capseo_t *cs, uint8_t *frame_in, capseo_frame_id_t id, cap
 	if (cursor && cursor->buffer) {
 		// store cursor image compressed, but keep colour space
 #if 1
-		end = encode(outptr, cursor->buffer, cursor->width * cursor->height * 4);
-		frameHeader.cursor.length = end - outptr;
+		frameHeader.cursor.length = Compress(ch, cursor->buffer, cursor->width * cursor->height * 4, outptr);
 #else
+		// raw
 		frameHeader.cursor.length = cursor->width * cursor->height * 4 * 2;
 		memcpy(outptr, cursor->buffer, frameHeader.cursor.length);
 #endif

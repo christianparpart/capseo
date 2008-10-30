@@ -13,6 +13,7 @@
 /////////////////////////////////////////////////////////////////////////////
 #include "capseo.h"
 #include "capseo_private.h"
+#include "compress.h"
 
 #include <assert.h>
 
@@ -83,6 +84,7 @@ int CapseoDecodeFrame(capseo_t *cs, uint8_t *inbuf, int inlen, int cursor, capse
 		return CAPSEO_E_NOT_SUPPORTED;
 
 	uint8_t *inptr = inbuf;
+	void *ch = cs->priv->compressor;
 
 	// decode header
 	TCapseoFrameHeader *header = (TCapseoFrameHeader *)inptr;
@@ -91,8 +93,7 @@ int CapseoDecodeFrame(capseo_t *cs, uint8_t *inbuf, int inlen, int cursor, capse
 
 	// decode video frame
 	int size = cs->info.width * cs->info.height * 3 / 2;
-	uint8_t *eptr = decode(out->buffer, inptr, size);
-	int length = eptr - out->buffer;
+	int length = Decompress(ch, inptr, out->buffer);
 	inptr += header->video.length;
 
 	assert(length == cs->info.width * cs->info.height * 3 / 2);
@@ -106,8 +107,7 @@ int CapseoDecodeFrame(capseo_t *cs, uint8_t *inbuf, int inlen, int cursor, capse
 		cursor.height = header->cursor.height;
 #if 1
 		cursor.buffer = cs->priv->encodedBuffer; // use this as tmp storage, as it's currently unused
-		eptr = decode(cursor.buffer, inptr, cursor.width * cursor.height * sizeof(uint32_t));
-		length = eptr - cursor.buffer;
+		length = Decompress(ch, inptr, cursor.buffer);
 		assert(length == cursor.width * cursor.height * sizeof(uint32_t));
 #else
 		cursor.buffer = inptr;

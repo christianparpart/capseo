@@ -9,8 +9,6 @@ noinst_LTLIBRARIES = libCapseoAccel.la
 
 libCapseoAccel_la_SOURCES = \
 	bgra2yuv420.c \
-	encode.cpp \
-	decode.cpp \
 	scale.cpp
 
 endif

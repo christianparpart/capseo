@@ -13,6 +13,7 @@
 /////////////////////////////////////////////////////////////////////////////
 #include "capseo.h"
 #include "capseo_private.h"
+#include "compress.h"
 
 #include <sys/time.h>
 #include <string.h>
@@ -111,9 +112,11 @@ int CapseoInitialize(capseo_t *cs, capseo_info_t *info) {
 	switch (info->mode) {
 		case CAPSEO_MODE_ENCODE:
 			validateEncodeInfo(info);
+			cs->priv->compressor = CompressorCreate();
 			break;
 		case CAPSEO_MODE_DECODE:
 			validateDecodeInfo(info);
+			cs->priv->compressor = DecompressorCreate();
 			break; 
 		default:
 			return CAPSEO_E_INVALID_ARGUMENT;
@@ -142,6 +145,15 @@ int CapseoInitialize(capseo_t *cs, capseo_info_t *info) {
  *  frees all memory safely.
  */
 void CapseoFinalize(capseo_t *cs) {
+	switch (cs->info.mode) {
+		case CAPSEO_MODE_ENCODE:
+			CompressorDestroy(cs->priv->compressor);
+			break;
+		case CAPSEO_MODE_DECODE:
+			DecompressorDestroy(cs->priv->compressor);
+			break;
+	}
+
 	bzero(cs->priv->encodedBuffer, cs->priv->encodedBufferLength);
 	delete[] cs->priv->encodedBuffer;
 	cs->priv->encodedBuffer = 0;

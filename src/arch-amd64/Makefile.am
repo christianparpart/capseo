@@ -18,9 +18,7 @@ ARCH_GENERIC = $(top_srcdir)/src/arch-generic
 
 libCapseoAccel_la_SOURCES = \
 	bgra2yuv420.asm \
-	scale.asm \
-	$(ARCH_GENERIC)/encode.cpp \
-	$(ARCH_GENERIC)/decode.cpp
+	scale.asm
 
 endif
 
