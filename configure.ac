@@ -1,7 +1,7 @@
 AC_INIT(src/capseo.h)
 
 CAPSEO_MAJOR_VERSION=0
-CAPSEO_MINOR_VERSION=2
+CAPSEO_MINOR_VERSION=3
 CAPSEO_MICRO_VERSION=0
 CAPSEO_RELEASE_INFO="-dev" # ^^ set to "" for releases - otherwise to "-dev"
 
