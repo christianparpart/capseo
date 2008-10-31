@@ -1,4 +1,7 @@
-Release 0.2.0 (not yet released):
+Release 0.3.0 (2008-10-31):
+	* codec: upgraded compression algorithm to QuickLZ 1.4.0
+
+Release 0.2.0:
 	* codec: improved stream and frame format
 	* codec: added cursor frame support
 	* framework: improved error management
