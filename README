@@ -15,5 +15,5 @@ vim:ai:et:ts=4:nowrap
 
  * seom       - http://www.neopsis.com/projects/seom
                 the capseo codec is based on seom's code.
- * libcaptury - http://rm-rf.in/projects/captury
+ * libcaptury - http://code.ninchens.net/wiki/libnuggad
                 based on libcapseo to encode video.
