@@ -68,7 +68,7 @@ int die(const char *fmt, ...) {//{{{
 	va_start(va, fmt);
 	vfprintf(stderr, fmt, va);
 	va_end(va);
-	fprintf(stderr, "\nI die...\n");
+	fprintf(stderr, "\n");
 	exit(1);
 	return 1; // never reached.
 }//}}}
