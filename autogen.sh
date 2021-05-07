@@ -7,10 +7,10 @@ if [ "$1" = "clean" ] || [ "$1" = "-clean" ] || [ "$1" = "--clean" ]; then
   exit 0
 fi
 
-export WANT_AUTOCONF="2.5"
-export WANT_AUTOMAKE="1.7"
+#export WANT_AUTOCONF="2.5"
+#export WANT_AUTOMAKE="1.7"
 
-autoreconf -v --install || exit 1
+autoreconf -f -v --install || exit 1
 
 echo "Don't forget the standard procudure:"
 echo "example: ./configure --prefix=/usr && make && make install"

@@ -5,7 +5,7 @@ function die() {
 	exit 1
 }
 
-PREFIX=${PREFIX:-/opt/sandbox}
+PREFIX=${PREFIX:-$HOME/sandbox}
 INSTALL=no
 VERBOSE=0
 
